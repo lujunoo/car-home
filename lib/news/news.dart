@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-class Tool extends StatelessWidget {
+
+class News extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -9,7 +10,7 @@ class Tool extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
-        body: new Center(child:new Text("工具")),
+        body: new Center(child:new Text("资讯")),
       ),
     );
   }

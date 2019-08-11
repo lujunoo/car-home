@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import "package:page/carInformation/carInformation.dart";
-import 'package:page/home/home.dart';
-import 'package:page/message/message.dart';
-import 'package:page/tool/tool.dart';
-import 'package:page/personalInfo/personalInfo.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-
-void main(){
+// 页面
+import "package:page/carInformation/carInformation.dart";
+import 'package:page/news/News.dart';
+import 'package:page/community/Community.dart';
+import 'package:page/find/Find.dart';
+import 'package:page/personalInfo/personalInfo.dart';
+void main() {
   runApp(new MyApp());
-  if(Platform.isAndroid) {
-  // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
-  // SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  // SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  if (Platform.isAndroid) {
+    // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
+    // SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    // SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
 
@@ -20,9 +20,26 @@ void main(){
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 设置主题色
+    const MaterialColor blueTheme = MaterialColor(
+   0xFF3171f7,
+    <int, Color>{
+       50: Color(0xFF3171f7),
+      100: Color(0xFF3171f7),
+      200: Color(0xFF3171f7),
+      300: Color(0xFF3171f7),
+      400: Color(0xFF3171f7),
+      500: Color(0xFF3171f7),
+      600: Color(0xFF3171f7),
+      700: Color(0xFF3171f7),
+      800: Color(0xFF3171f7),
+    },
+  );
     return new MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.white
+         primarySwatch:blueTheme,
+          primaryColor: Colors.grey[100],
+          primaryColorBrightness: Brightness.light,
       ),
       debugShowCheckedModeBanner: false,
       // title: 'test demo',
@@ -41,11 +58,10 @@ class BottomTabBar extends StatefulWidget {
 class _BottomTabBarState extends State<BottomTabBar> {
   int selectIndex = 0;
   var _body = [
-    
-    new Home(),
-    new Message(),
     new CarInformation(),
-    new Tool(),
+    new News(),
+    new Find(),
+    new Community(),
     new PersonalInfo(),
   ];
 
@@ -61,26 +77,35 @@ class _BottomTabBarState extends State<BottomTabBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.data_usage), title: Text('首页')),
+            icon: Icon(IconData(0xe61d, fontFamily: 'iconfont')),
+            title: Text('选车'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.alternate_email), title: Text('消息')),
+            icon: Icon(IconData(0xe604, fontFamily: 'iconfont')),
+            title: Text('资讯'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.drive_eta), title: Text('选车')),
+            icon: Icon(IconData(0xe62a, fontFamily: 'iconfont')),
+            title: Text('发现'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text('工具')),
+            icon: Icon(IconData(0xe60e, fontFamily: 'iconfont')),
+            title: Text('社区'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), title: Text('我的')),
+            icon: Icon(IconData(0xe60d, fontFamily: 'iconfont')),
+            title: Text('我的'),
+          ),
         ],
         //默认选中当前的tabBar位置
         currentIndex: selectIndex,
-        fixedColor: Color.fromRGBO(245, 70, 65, 1),
+        fixedColor: Theme.of(context).accentColor,
         type: BottomNavigationBarType.fixed,
         //处理tabBar的点击事件
         onTap: (int index) {
           setState(() {
             selectIndex = index;
           });
-          
         },
       ),
     );
